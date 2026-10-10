@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Per te ♥</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <!-- ===== IMPOSTAZIONI ===== -->
+  <!-- data-fine = fine del conto alla rovescia (anno-mese-giornoTora). Mezzanotte del 12 ottobre = 13 ottobre alle 00:00 -->
+  <!-- data-cuori = quanti cuori servono per vincere -->
+  <body class="attesa" data-fine="2026-10-13T00:00:00" data-cuori="10">
+    <!-- CONTO ALLA ROVESCIA -->
+    <div class="conto schermo">
+      <h1>Manca pochissimo a una sorpresa per te…</h1>
+      <div class="tempo">
+        <div><b class="n-giorni">0</b><small>giorni</small></div>
+        <div><b class="n-ore">0</b><small>ore</small></div>
+        <div><b class="n-minuti">0</b><small>minuti</small></div>
+        <div><b class="n-secondi">0</b><small>secondi</small></div>
+      </div>
+    </div>
+
+    <!-- CIELO STELLATO -->
+    <section class="cielo">
+      <div class="fondo"></div>
+
+      <!-- LINEE delle costellazioni: i numeri sono le stesse posizioni delle stelle (left,top) -->
+      <svg class="linee" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polyline class="linea" points="8,24 18,13 28,26 38,14 47,25" />
+        <polyline class="linea" points="66,32 66,50 66,72" />
+        <polyline class="linea" points="54,48 66,50 78,52" />
+      </svg>
+
+      <!-- title = nome della stella (appare passandoci sopra col mouse)
+       data-testo = la frase | data-foto = nome del file della foto (nella stessa cartella) -->
+
+      <!-- COSTELLAZIONE DI CASSIOPEA (5 stelle) -->
+      <div class="costellazione cas">
+        <button
+          class="stella cas-1"
+          title="Caph · Cassiopea"
+          data-testo="Desidero viaggiare il mondo con te."
+        >
+          ★
+        </button>
+        <button
+          class="stella cas-2"
+          title="Schedar · Cassiopea"
+          data-foto="/img/foto1.jpg"
+        >
+          ★
+        </button>
+        <button
+          class="stella cas-3"
+          title="Navi · Cassiopea"
+          data-testo="Desidero creare ogni giorno nuovi ricordi insieme a te."
+        >
+          ★
+        </button>
+        <button
+          class="stella cas-4"
+          title="Ruchbah · Cassiopea"
+          data-testo="Desidero che ogni giorno sia migliore del precedente, insieme a te."
+        >
+          ★
+        </button>
+        <button
+          class="stella cas-5"
+          title="Segin · Cassiopea"
+          data-testo="Desidero continuare a stare bene con te, anche se goni tanto ci saranno momenti difficili."
+        >
+          ★
+        </button>
+      </div>
+
+      <!-- COSTELLAZIONE DEL CIGNO (5 stelle) -->
+      <div class="costellazione cig">
+        <button
+          class="stella cig-1"
+          title="Deneb · Cigno"
+          data-foto="/img/foto2.jpeg"
+        >
+          ★
+        </button>
+        <button
+          class="stella cig-2"
+          title="Sadr · Cigno"
+          data-testo="Desidero stare con te per sempre."
+        >
+          ★
+        </button>
+        <button
+          class="stella cig-3"
+          title="Albireo · Cigno"
+          data-testo="Desidero che, un giorno, vivremo insieme e potremmo fare ciò che vogliamo quando vogliamo."
+        >
+          ★
+        </button>
+        <button
+          class="stella cig-4"
+          title="Gienah · Cigno"
+          data-testo="Desidero che il nostro amore non finsica mai."
+        >
+          ★
+        </button>
+        <button
+          class="stella cig-5"
+          title="Fawaris · Cigno"
+          data-testo="Desidero continuare a crescere con te, anche se probabilmente sarà difficile."
+        >
+          ★
+        </button>
+      </div>
+
+      <button class="luna" title="La luna"></button>
+      <p class="aiuto">
+        Ogni stella custodisce un desiderio o un ricordo… e la luna una
+        sorpresa.
+      </p>
+      <button class="freccia" aria-label="Scorri verso il basso">&gt;</button>
+    </section>
+
+    <!-- CONTENUTI CHE ESCONO DA SOTTO: cambia testi e date, copia/incolla un blocco "momento" per aggiungerne -->
+    <section class="sotto">
+      <h2 class="da-sotto">Due anni insieme</h2>
+
+      <article class="momento da-sotto">
+        <time>Da quanto ci sopportiamo?</time>
+        <p>2 anni</p>
+        <p>12 mesi</p>
+        <p title="no, non fai ridere">104 settimane</p>
+        <p>730 giorni</p>
+        <p>17.520 ore</p>
+        <p>1.051.200 minuti</p>
+        <p>63.072.000 secondi</p>
+      </article>
+      <article class="momento da-sotto">
+        <time>La nostra playlist</time>
+        <p>Questo è solo un inizio, tocca all'esperto di musica della coppia personalizzarla davvero.</p>
+        <iframe
+          class="spotify"
+          src="https://open.spotify.com/embed/playlist/1wsjYtogiGsZK5PkhAQvWs"
+          height="352"
+          allow="
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            picture-in-picture;
+          "
+          loading="lazy"
+        ></iframe>
+      </article>
+
+      <p class="finale da-sotto">Buon secondo anniversario vita mia ♥</p>
+    </section>
+
+    <!-- GIOCO DEI CUORI -->
+    <div class="gioco schermo nascosto">
+      <button class="chiudi esci" aria-label="Chiudi">×</button>
+      <div class="punti">
+        Prendi i cuori: <span class="n-presi">0</span> /
+        <span class="n-totale"></span>
+      </div>
+      <div class="campo"></div>
+    </div>
+
+    <!-- FINESTRA CHE MOSTRA FOTO, FRASI E LETTERA -->
+    <div class="finestra nascosto">
+      <div class="scheda">
+        <button class="chiudi" aria-label="Chiudi">×</button>
+        <div class="contenuto"></div>
+      </div>
+    </div>
+
+    <audio class="musica" src="/img/musica.mp3" loop></audio>
+    <button class="suono" title="Musica">♪</button>
+
+    <!-- LA LETTERA (premio del gioco): ogni <p> è un paragrafo -->
+    <template
+      class="testo-lettera"
+      title="Due quadretti per un occasione mi sembrava troppo."
+    >
+      <img
+        src="/img/foto3.png"
+        alt="Foto"
+        title="Potremmo farci qualche foto in più."
+      />
+    </template>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

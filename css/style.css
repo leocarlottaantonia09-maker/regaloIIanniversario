@@ -1,0 +1,535 @@
+/* ===== COLORI: cambia qui i colori di tutta la pagina ===== */
+:root {
+  --notte: #120628; /* viola scurissimo (alto) */
+  --viola: #3a1d78; /* viola medio (sfumatura) */
+  --lilla: #b9a2ff; /* linee, bordi, dettagli */
+  --stella: #ffe3b3; /* stelle e numeri */
+  --luna: #f3e8ff; /* luna */
+  --cuore: #9634cb; /* cuori */
+  --scheda: #25104f; /* sfondo delle finestre */
+  --testo: #fff;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: linear-gradient(var(--notte), var(--viola) 70%, #5a35a8);
+  color: var(--testo);
+  font-family: Georgia, "Times New Roman", serif;
+  text-align: center;
+}
+body.attesa {
+  overflow: hidden;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nascosto {
+  opacity: 0;
+  pointer-events: none;
+}
+.schermo {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--notte);
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s;
+}
+
+/* ===== CONTO ALLA ROVESCIA ===== */
+.conto h1 {
+  font-size: clamp(1.3rem, 5vw, 2.2rem);
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: 1.6rem;
+  padding: 0 1.2rem;
+}
+.tempo {
+  display: flex;
+  gap: clamp(0.7rem, 3.5vw, 1.8rem);
+}
+.tempo b {
+  display: block;
+  font-weight: normal;
+  font-size: clamp(2.2rem, 10vw, 4.2rem);
+  color: var(--stella);
+  line-height: 1;
+}
+.tempo small {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #fff9;
+}
+body:not(.attesa) .conto {
+  display: none;
+}
+body.attesa .cielo,
+body.attesa .sotto {
+  display: none;
+}
+
+/* ===== CIELO ===== */
+.cielo {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  animation: appari 1.6s;
+}
+.fondo {
+  position: absolute;
+  inset: 0;
+  background-size: 210px 190px;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 90px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 150px 120px, #fffa, transparent),
+    radial-gradient(2px 2px at 60px 150px, #fff, transparent),
+    radial-gradient(1px 1px at 185px 20px, #fff8, transparent);
+  animation: brilla 5s ease-in-out infinite;
+}
+.fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: 150px 130px;
+  background-image:
+    radial-gradient(1px 1px at 40px 90px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 110px 30px, #fffc, transparent),
+    radial-gradient(1px 1px at 70px 10px, #fff9, transparent);
+  animation: brilla 3.5s 1s ease-in-out infinite;
+}
+@keyframes brilla {
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes appari {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulsa {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.linee {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.linea {
+  fill: none;
+  stroke: var(--lilla);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-opacity: 0.6;
+}
+.vivo .linee {
+  animation: appari 3s 3s forwards;
+}
+
+.costellazione {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.stella {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  font-size: 30px;
+  line-height: 44px;
+  color: var(--stella);
+  text-shadow: 0 0 12px var(--stella);
+  opacity: 0;
+  pointer-events: auto;
+}
+.vivo .stella {
+  animation:
+    appari 1.6s forwards,
+    pulsa 2.6s ease-in-out infinite;
+  animation-delay:
+    calc(1s + (var(--d) + var(--o, 0)) * 0.3s),
+    calc(4s + (var(--d) + var(--o, 0)) * 0.3s);
+}
+.stella.letta {
+  color: #fff;
+  text-shadow: 0 0 6px #fff8;
+  animation: none !important;
+  opacity: 0.7;
+}
+.stella:nth-child(1) {
+  --d: 0;
+}
+.stella:nth-child(2) {
+  --d: 1;
+}
+.stella:nth-child(3) {
+  --d: 2;
+}
+.stella:nth-child(4) {
+  --d: 3;
+}
+.stella:nth-child(5) {
+  --d: 4;
+}
+.cig .stella {
+  --o: 5;
+}
+
+/* POSIZIONI DELLE STELLE (left = orizzontale, top = verticale, in %) */
+/* se le sposti, ricorda di spostare anche le linee (polyline) nell'HTML con gli stessi numeri */
+.cas-1 {
+  left: 8%;
+  top: 24%;
+}
+.cas-2 {
+  left: 18%;
+  top: 13%;
+}
+.cas-3 {
+  left: 28%;
+  top: 26%;
+}
+.cas-4 {
+  left: 38%;
+  top: 14%;
+}
+.cas-5 {
+  left: 47%;
+  top: 25%;
+}
+.cig-1 {
+  left: 66%;
+  top: 32%;
+}
+.cig-2 {
+  left: 66%;
+  top: 50%;
+}
+.cig-3 {
+  left: 66%;
+  top: 72%;
+}
+.cig-4 {
+  left: 54%;
+  top: 48%;
+}
+.cig-5 {
+  left: 78%;
+  top: 52%;
+}
+
+.luna {
+  position: absolute;
+  top: 6%;
+  right: 7%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fff,
+    var(--luna) 60%,
+    #c9b3e6
+  );
+  box-shadow: 0 0 40px 8px #f3e8ff55;
+  opacity: 0;
+}
+.vivo .luna {
+  animation:
+    appari 2s 1.5s forwards,
+    pulsaluna 3s 3.5s ease-in-out infinite;
+}
+@keyframes pulsaluna {
+  50% {
+    box-shadow: 0 0 60px 18px #f3e8ff88;
+  }
+}
+.aiuto {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  font-style: italic;
+  color: #fffb;
+  padding: 0 1rem;
+}
+.freccia {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  line-height: 40px;
+  color: var(--lilla);
+  transform: rotate(90deg);
+  animation: rimbalza 1.8s ease-in-out infinite;
+}
+@keyframes rimbalza {
+  50% {
+    transform: rotate(90deg) translateX(8px);
+  }
+}
+
+/* ===== MUSICA ===== */
+.suono {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 30;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lilla);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--lilla);
+  background: #25104f99;
+}
+.suono.spento {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+body.attesa .suono {
+  display: none;
+}
+
+/* ===== SEZIONE SOTTO ===== */
+
+
+.sotto {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 6rem;
+}
+.sotto h2 {
+  font-weight: normal;
+  font-style: italic;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  color: var(--stella);
+  margin-bottom: 2.5rem;
+}
+.momento {
+  text-align: left;
+  border-left: 2px solid var(--lilla);
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 1.15rem;
+}
+
+.spotify {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.momento time {
+  display: block;
+  color: var(--lilla);
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.finale {
+  margin-top: 4rem;
+  font-size: 5rem;
+  font-style: italic;
+  font-family: Birthstone, Georgia, "Times New Roman", serif;
+  line-height: 1.5;
+}
+.da-sotto {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s,
+    transform 1s;
+}
+.da-sotto.visibile {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== FINESTRA (foto, frasi, lettera) ===== */
+.finestra {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #0a0420cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  transition: opacity 0.4s;
+}
+.scheda {
+  position: relative;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--scheda);
+  border: 1px solid var(--lilla);
+  border-radius: 14px;
+  padding: 2rem 1.6rem 1.6rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  box-shadow: 0 0 40px #000a;
+}
+.scheda img {
+  max-width: 100%;
+  max-height: 50vh;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.scheda .rotta {
+  display: none;
+}
+.nome {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--lilla);
+  margin-bottom: 0.6rem;
+}
+.lettera {
+  text-align: left;
+  font-style: italic;
+}
+.lettera p + p {
+  margin-top: 0.9rem;
+}
+.chiudi {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.8rem;
+  font-size: 1.6rem;
+  color: #fff9;
+}
+
+/* ===== GIOCO CUORI ===== */
+.gioco {
+  z-index: 10;
+  background: #0d0528f2;
+}
+.punti {
+  position: absolute;
+  top: 1.2rem;
+  left: 0;
+  right: 0;
+  font-size: 1.2rem;
+  color: var(--stella);
+  padding: 0 3rem;
+}
+.campo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.campo.fine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.cuore {
+  position: absolute;
+  top: -60px;
+  font-size: 44px;
+  color: var(--cuore);
+  text-shadow: 0 0 14px var(--cuore);
+  padding: 6px;
+  animation: cade linear forwards;
+}
+@keyframes cade {
+  to {
+    transform: translateY(112vh) rotate(25deg);
+  }
+}
+.corsia-0 {
+  left: 2%;
+}
+.corsia-1 {
+  left: 11%;
+}
+.corsia-2 {
+  left: 20%;
+}
+.corsia-3 {
+  left: 29%;
+}
+.corsia-4 {
+  left: 38%;
+}
+.corsia-5 {
+  left: 47%;
+}
+.corsia-6 {
+  left: 56%;
+}
+.corsia-7 {
+  left: 65%;
+}
+.corsia-8 {
+  left: 74%;
+}
+.corsia-9 {
+  left: 83%;
+}
+.vel-0 {
+  animation-duration: 3.2s;
+}
+.vel-1 {
+  animation-duration: 4.4s;
+}
+.vel-2 {
+  animation-duration: 5.6s;
+}
+.busta {
+  font-size: 5.5rem;
+  animation: pulsa 2s ease-in-out infinite;
+}
+.vittoria {
+  font-size: 1.4rem;
+  font-style: italic;
+}
+.bottone {
+  font-size: 1.2rem;
+  border: 1px solid #fff8;
+  border-radius: 30px;
+  padding: 0.6rem 1.6rem;
+  background: #ffffff14;
+}
+.bottone:hover {
+  background: #ffffff30;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01s !important;
+    transition-duration: 0.01s !important;
+  }
+}
